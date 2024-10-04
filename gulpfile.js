@@ -2,6 +2,8 @@ const gulp = require("gulp");
 const sass = require("gulp-sass")(require("sass"));
 const cleanCSS = require("gulp-clean-css");
 const sourcemaps = require("gulp-sourcemaps");
+const babel = require("gulp-babel");
+const uglify = require("gulp-uglify");
 
 // Define the 'sass' task with source maps
 gulp.task("sass", function () {
@@ -12,6 +14,19 @@ gulp.task("sass", function () {
     .pipe(cleanCSS()) // Minify CSS
     .pipe(sourcemaps.write(".")) // Write sourcemaps file in the same directory as the compiled CSS
     .pipe(gulp.dest("assets/stylesheets/css")); // Destination folder for compiled CSS files
+});
+
+// JS Task
+gulp.task("scripts", function () {
+  return gulp
+    .src("assets/js/**/*.js") // Point to your JS files
+    .pipe(
+      babel({
+        presets: ["@babel/preset-env"], // Use Babel to transpile modern JS to browser-friendly JS
+      })
+    )
+    .pipe(uglify()) // Minify JS
+    .pipe(gulp.dest("assets/js/dist")); // Output folder
 });
 
 // Define the 'build' task (used for deployment)

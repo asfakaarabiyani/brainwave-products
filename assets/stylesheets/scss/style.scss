@@ -1,4 +1,10 @@
-$primary: #453403;
-$secondary:#ff34ff;
-@import "./reset";
+@import "./fonts";
+$light :white;
+$bg-primary:#473BF0;
+
+.navbar-brand{
+    font-family: gilroybold;
+}
+
+
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
